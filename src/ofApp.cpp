@@ -90,6 +90,15 @@ void ofApp::setup() {
 //        i++;
     }
     
+    for (int i = 0; i<600; i++) {
+        shared_ptr< ofxBulletSphere > sphere( new ofxBulletSphere() );
+        float trad = fabs(sin( ofGetElapsedTimef() ) * 5);
+        sphere->create( world.world, ofVec3f( cos( ofGetElapsedTimef()*10.)*trad ,-6, sin(ofGetElapsedTimef()*10)*trad ), 2., 0.2 );
+        sphere->add();
+        bulletSpheres.push_back( sphere );
+    }
+    
+    
     vector< glm::vec2 >& tcoords = omesh.getTexCoords();
     for( int i = 0; i < tcoords.size(); i++ ) {
         tcoords[i].x *= 4.f;
@@ -117,7 +126,7 @@ void ofApp::update() {
     if(mouse_clicked) {
         shared_ptr< ofxBulletSphere > sphere( new ofxBulletSphere() );
         float trad = fabs(sin( ofGetElapsedTimef() ) * 5);
-        sphere->create( world.world, ofVec3f( cos( ofGetElapsedTimef()*10.)*trad ,-6, sin(ofGetElapsedTimef()*10)*trad ), 1., 0.2 );
+        sphere->create( world.world, ofVec3f( cos( ofGetElapsedTimef()*10.)*trad ,-6, sin(ofGetElapsedTimef()*10)*trad ), 2., 0.2 );
         sphere->add();
         bulletSpheres.push_back( sphere );
         
